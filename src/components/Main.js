@@ -96,6 +96,9 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
+    const { origin, destination } = this.state;
+    console.log('origin*', origin);
+    console.log('destination**', destination);
     return (
       <div className={classes.container}>
         <div className={classes.navbar}>
@@ -188,10 +191,30 @@ class Main extends Component {
                   this.setState({ destination: e.target.value });
                 }}
               />
-              <div className={classes.distancebox}>
-                <Grid item>Distance</Grid>
-                <Grid item> Calculate</Grid>
-              </div>
+              {origin &&
+              origin !== undefined &&
+              origin !== '' &&
+              destination &&
+              destination !== undefined &&
+              destination !== '' ? (
+                <div className={classes.distancebox}>
+                  <Grid item>
+                    <Typography
+                      style={{
+                        fontSize: '20px',
+                      }}
+                    >
+                      <b>Distance</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography>
+                      The distance between {origin} and {destination} via the
+                      seleted route is d kms.
+                    </Typography>
+                  </Grid>
+                </div>
+              ) : null}
             </Grid>
             <Grid item xs={3} lg={2} className={classes.buttongrid}>
               <Button
@@ -203,7 +226,7 @@ class Main extends Component {
                   width: '141px',
                   height: '52px',
                   marginTop: '122px',
-                  marginLeft: '50px',
+                  marginLeft: '100px',
                 }}
                 onClick={() => {
                   this.handleCalculate();

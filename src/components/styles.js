@@ -61,13 +61,23 @@ export default withStyles((theme) => ({
     lineHeight: '18px',
   },
   distancebox: {
-    marginTop: '',
-    width: '490px',
-    height: '155px',
+    marginTop: '30px',
+    width: '400px',
+    height: '85px',
+    border: '1px',
     borderRadius: '8px',
+    backgroundColor: 'white',
+    padding: '20px',
   },
   mapCard: {
     width: '200px',
     height: '150px',
+  },
+  distanceText: {
+    fontStyle: 'IBM Plex Sans',
+    padding: '30px',
+    fontWeight: '700',
+    fontSize: '20px',
+    backgroundColor: 'white',
   },
 }));
