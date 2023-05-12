@@ -41,6 +41,11 @@ export default withStyles((theme) => ({
     marginLeft: '5rem',
   },
   button: { backgroundColor: '#1B31A8' },
+  buttongrid: {
+    display: 'block',
+    width: '90%',
+    marginLeft: '200px',
+  },
   addNewStop: { marginLeft: '200px' },
   addNewStopImage: {
     width: '18px',

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import withStyles from './styles';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { TextField, Typography, Paper } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import Navbar from './Navbar';
 import InputAdornment from '@mui/material/InputAdornment';
 import OriginIcon from '../Images/Origin Icon.png';
@@ -16,7 +16,7 @@ import CustomSnackbar from './Snackbar';
 import axios from 'axios';
 import MapView from './MapView';
 
-const API_KEY = 'AIzaSyAYBivEevsC3sXYWfY6n9803tvASqB0TUI';
+import { GOOGLE_API_KEY } from '../config';
 
 class Main extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class Main extends Component {
         const { origin, destination } = this.state;
         let URI =
           API_GET_DISTANCE +
-          `?origins=${origin}&destinations=${destination}&key=${API_KEY}`;
+          `?origins=${origin}&destinations=${destination}&key=${GOOGLE_API_KEY}`;
         let config = {
           method: 'get',
           url: URI,
@@ -193,8 +193,7 @@ class Main extends Component {
                 <Grid item> Calculate</Grid>
               </div>
             </Grid>
-
-            <Grid item xs={3} lg={2}>
+            <Grid item xs={3} lg={2} className={classes.buttongrid}>
               <Button
                 variant='contained'
                 disableRipple
