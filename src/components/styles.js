@@ -34,11 +34,31 @@ export default withStyles((theme) => ({
   },
   inputbox: {
     background: 'white',
-    width: '350px',
+    width: '350px !important',
   },
   content: {
     padding: '3rem',
     marginLeft: '5rem',
   },
   button: { backgroundColor: '#1B31A8' },
+  addNewStop: { marginLeft: '200px' },
+  addNewStopImage: {
+    width: '18px',
+    height: '18px',
+    padding: '4px',
+  },
+  addNewStopContent: {
+    padding: '3px',
+    fontFamily: 'Rubik',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '15px',
+    lineHeight: '18px',
+  },
+  distancebox: {
+    marginTop: '',
+    width: '490px',
+    height: '155px',
+    borderRadius: '8px',
+  },
 }));

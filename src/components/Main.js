@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import withStyles from './styles';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { TextField, Typography } from '@mui/material';
+import { TextField, Typography, Paper } from '@mui/material';
 import Navbar from './Navbar';
 import InputAdornment from '@mui/material/InputAdornment';
-import TripOriginIcon from '@mui/icons-material/TripOrigin';
-import AddLocationIcon from '@mui/icons-material/AddLocation';
+import OriginIcon from '../Images/Origin Icon.png';
+import DestinationIcon from '../Images/Destination Icon.png';
+import StopIcon from '../Images/Stop Icon.png';
+import addStop from '../Images/Add--alt.png';
 
 class Main extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class Main extends Component {
             Let's calculate <b>distance</b> from Google maps
           </Typography>
           <Grid container className={classes.content}>
-            <Grid item>
+            <Grid item xs={8} lg={4}>
               <Typography className={classes.inputHeading}>Origin</Typography>
               <TextField
                 autoFocus
@@ -45,7 +47,7 @@ class Main extends Component {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <TripOriginIcon />
+                      <img src={OriginIcon} alt='origin'></img>
                     </InputAdornment>
                   ),
                 }}
@@ -65,10 +67,23 @@ class Main extends Component {
                 className={classes.inputbox}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position='start'></InputAdornment>
+                    <InputAdornment position='start'>
+                      <img src={StopIcon} alt='stop'></img>
+                    </InputAdornment>
                   ),
                 }}
               />
+              <Grid container className={classes.addNewStop}>
+                <img
+                  src={addStop}
+                  alt='addStop'
+                  className={classes.addNewStopImage}
+                ></img>
+                <Typography className={classes.addNewStopContent}>
+                  Add another stop
+                </Typography>
+              </Grid>
+
               <Typography className={classes.inputHeading} marginTop={2}>
                 Destination
               </Typography>
@@ -85,13 +100,18 @@ class Main extends Component {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <AddLocationIcon />
+                      <img src={DestinationIcon} alt='destination'></img>
                     </InputAdornment>
                   ),
                 }}
               />
+              <div className={classes.distancebox}>
+                <Grid item>Distance</Grid>
+                <Grid item> Calculate</Grid>
+              </div>
             </Grid>
-            <Grid item>
+
+            <Grid item xs={4} lg={2}>
               <Button
                 variant='contained'
                 disableRipple
@@ -101,11 +121,14 @@ class Main extends Component {
                   width: '141px',
                   height: '52px',
                   marginTop: '122px',
-                  marginLeft: '150px',
+                  marginLeft: '50px',
                 }}
               >
                 Calculate
               </Button>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Paper></Paper>
             </Grid>
           </Grid>
         </div>
