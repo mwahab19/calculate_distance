@@ -1,3 +1,7 @@
+# Couldn't access the google maps API Key
+
+The key provided by the company had restrictions in CORS.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
