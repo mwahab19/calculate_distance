@@ -8,8 +8,9 @@ const mapStyles = {
 };
 
 const containerStyle = {
-  width: '50%',
-  height: '65%',
+  marginLeft: '50px',
+  width: '40%',
+  height: '55%',
 };
 class MapView extends Component {
   constructor(props) {
