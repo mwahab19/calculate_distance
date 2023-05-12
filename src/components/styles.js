@@ -62,7 +62,7 @@ export default withStyles((theme) => ({
     borderRadius: '8px',
   },
   mapCard: {
-    width: '560px',
-    height: '511px',
+    width: '200px',
+    height: '150px',
   },
 }));

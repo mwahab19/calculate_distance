@@ -14,6 +14,7 @@ import { API_GET_DISTANCE } from '../constants/APIEndPoints';
 import CustomLoader from './CustomLoader';
 import CustomSnackbar from './Snackbar';
 import axios from 'axios';
+import MapView from './MapView';
 
 const API_KEY = 'AIzaSyAYBivEevsC3sXYWfY6n9803tvASqB0TUI';
 
@@ -105,8 +106,8 @@ class Main extends Component {
           <Typography className={classes.heading}>
             Let's calculate <b>distance</b> from Google maps
           </Typography>
-          <Grid container className={classes.content}>
-            <Grid item xs={4} lg={4}>
+          <Grid container className={classes.content} display='flex'>
+            <Grid item xs={3} lg={3}>
               <Typography className={classes.inputHeading}>Origin</Typography>
               <TextField
                 autoFocus
@@ -193,7 +194,7 @@ class Main extends Component {
               </div>
             </Grid>
 
-            <Grid item xs={4} lg={2}>
+            <Grid item xs={3} lg={2}>
               <Button
                 variant='contained'
                 disableRipple
@@ -212,8 +213,10 @@ class Main extends Component {
                 Calculate
               </Button>
             </Grid>
-            <Grid item xs={4} lg={6}>
-              <div className={classes.mapCard}></div>
+            <Grid item xs={6} lg={6}>
+              <div>
+                <MapView />
+              </div>
             </Grid>
           </Grid>
         </div>
