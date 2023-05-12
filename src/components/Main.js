@@ -9,6 +9,13 @@ import OriginIcon from '../Images/Origin Icon.png';
 import DestinationIcon from '../Images/Destination Icon.png';
 import StopIcon from '../Images/Stop Icon.png';
 import addStop from '../Images/Add--alt.png';
+import { API_GET_DISTANCE } from '../constants/APIEndPoints';
+//import { callGetApi } from '../constants/APIManagers';
+import CustomLoader from './CustomLoader';
+import CustomSnackbar from './Snackbar';
+import axios from 'axios';
+
+const API_KEY = 'AIzaSyAYBivEevsC3sXYWfY6n9803tvASqB0TUI';
 
 class Main extends Component {
   constructor(props) {
@@ -17,9 +24,75 @@ class Main extends Component {
       origin: '',
       destination: '',
       stops: '',
+      showLoader: false,
+      showSnackbar: false,
+      snackbarVariant: '',
+      snackBarMessage: '',
+      position: 'left',
     };
   }
-  state = {};
+
+  fnShowSnackbar = (msg = '', variant = 'warning') => {
+    this.setState(
+      {
+        showSnackbar: true,
+        snackBarMessage: msg,
+        snackbarVariant: variant,
+        showLoader: false,
+      },
+      () => {}
+    );
+  };
+
+  handleCalculate = async () => {
+    try {
+      this.setState({ showLoader: true });
+      let validated = this._validate();
+      if (validated && validated.validate) {
+        const { origin, destination } = this.state;
+        let URI =
+          API_GET_DISTANCE +
+          `?origins=${origin}&destinations=${destination}&key=${API_KEY}`;
+        let config = {
+          method: 'get',
+          url: URI,
+          headers: {},
+        };
+        let res = await axios(config);
+        console.log('response:::', res);
+        this.setState({ showLoader: false });
+      } else {
+        this.fnShowSnackbar(validated.msg, 'warning');
+      }
+    } catch (err) {
+      console.log(`Error in calculating the distance***`, err);
+      this.fnShowSnackbar('Error in calculating the distance', 'error');
+    }
+  };
+
+  _validate = () => {
+    const { origin, destination } = this.state;
+    let validate = true;
+    let msg = '';
+    if (!origin || origin === undefined || origin === '') {
+      validate = false;
+      msg = `Please enter the origin place`;
+    } else if (
+      !destination ||
+      destination === undefined ||
+      destination === ''
+    ) {
+      validate = false;
+      msg = `Please enter the destination place`;
+    }
+    let obj = { validate: validate, msg: msg };
+    return obj;
+  };
+
+  handleSnackBarClose = () => {
+    this.setState({ showSnackbar: false });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -33,7 +106,7 @@ class Main extends Component {
             Let's calculate <b>distance</b> from Google maps
           </Typography>
           <Grid container className={classes.content}>
-            <Grid item xs={8} lg={4}>
+            <Grid item xs={4} lg={4}>
               <Typography className={classes.inputHeading}>Origin</Typography>
               <TextField
                 autoFocus
@@ -50,6 +123,9 @@ class Main extends Component {
                       <img src={OriginIcon} alt='origin'></img>
                     </InputAdornment>
                   ),
+                }}
+                onChange={(e) => {
+                  this.setState({ origin: e.target.value });
                 }}
               />
               <Typography className={classes.inputHeading} marginTop={2}>
@@ -71,6 +147,9 @@ class Main extends Component {
                       <img src={StopIcon} alt='stop'></img>
                     </InputAdornment>
                   ),
+                }}
+                onChange={(e) => {
+                  this.setState({ stop: e.target.value });
                 }}
               />
               <Grid container className={classes.addNewStop}>
@@ -104,6 +183,9 @@ class Main extends Component {
                     </InputAdornment>
                   ),
                 }}
+                onChange={(e) => {
+                  this.setState({ destination: e.target.value });
+                }}
               />
               <div className={classes.distancebox}>
                 <Grid item>Distance</Grid>
@@ -123,15 +205,29 @@ class Main extends Component {
                   marginTop: '122px',
                   marginLeft: '50px',
                 }}
+                onClick={() => {
+                  this.handleCalculate();
+                }}
               >
                 Calculate
               </Button>
             </Grid>
-            <Grid item xs={12} lg={6}>
-              <Paper></Paper>
+            <Grid item xs={4} lg={6}>
+              <div className={classes.mapCard}></div>
             </Grid>
           </Grid>
         </div>
+
+        {this.state.showLoader && (
+          <CustomLoader showLoader={this.state.showLoader} />
+        )}
+        <CustomSnackbar
+          showSnackbar={this.state.showSnackbar}
+          variant={this.state.snackbarVariant}
+          message={this.state.snackBarMessage}
+          onClose={this.handleSnackBarClose}
+          position={this.state.position}
+        />
       </div>
     );
   }

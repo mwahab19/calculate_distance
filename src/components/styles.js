@@ -61,4 +61,8 @@ export default withStyles((theme) => ({
     height: '155px',
     borderRadius: '8px',
   },
+  mapCard: {
+    width: '560px',
+    height: '511px',
+  },
 }));
